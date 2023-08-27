@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace EasyToUseShutdownTimer
@@ -15,6 +16,12 @@ namespace EasyToUseShutdownTimer
         {
             bool isTimerActive = Properties.Settings.Default.IsTimerActive;
             
+            // Check if time has passed
+            if (isTimerActive && checkIfSetTimerTimePassed(Properties.Settings.Default.timeToTimer))
+            {
+                Properties.Settings.Default.IsTimerActive = false;
+            }
+
             // Add 10 minutes to current time
             dateTimePicker1.Value = DateTime.Now.AddMinutes(10);
 
@@ -28,9 +35,28 @@ namespace EasyToUseShutdownTimer
             }
         }
 
+        private Boolean checkIfSetTimerTimePassed(DateTime dateTime)
+        {
+            // Get current datetime
+            DateTime currentDateTime = DateTime.Now;
+
+            // Return true if time passed
+            if (currentDateTime > dateTime)
+            {
+                return true;
+            }
+            return false;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             DateTime selectedTime = dateTimePicker1.Value;
+
+            if (checkIfSetTimerTimePassed(selectedTime)) { 
+                MessageBox.Show("Selected time is set in past. Please choose a time that is in the future."); 
+                return; 
+            }
+            
             TimeSpan timeDifference = selectedTime - DateTime.Now;
             int seconds = (int)timeDifference.TotalSeconds;
 
@@ -90,6 +116,13 @@ namespace EasyToUseShutdownTimer
             // Set the time when shutdown
             timeTillAction.Text = "PC will " + Properties.Settings.Default.actionName + " at";
             timeLabel.Text = Properties.Settings.Default.timeToTimer.ToString();
+
+            // Center the timeTillAction label within the groupBox2 control
+            int timeTillActionLabelWidth = timeTillAction.Width;
+            int groupBoxWidth = groupBox2.Width;
+            int labelX = (groupBoxWidth - timeTillActionLabelWidth) / 2;
+            timeTillAction.Location = new Point(labelX, timeTillAction.Location.Y);
+
         }
     }
 }
