@@ -1,4 +1,6 @@
-# EasyToUseShutdownTimer (Ps. WIP! Some features may be still coming)
+# EasyToUseShutdownTimer
+
+#### Note: Work in progress. 
 
 EasyToUseShutdownTimer is a simple Windows Forms application written in C# that allows users to set timers for automatic shutdown, restart, or hibernate actions on their computer. This can be useful for scenarios where you want your computer to perform an action after a specified amount of time has passed.
 
