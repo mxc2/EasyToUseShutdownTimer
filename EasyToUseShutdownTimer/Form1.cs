@@ -64,18 +64,18 @@ namespace EasyToUseShutdownTimer
             string action = "";
             if (radioButtonShutdown.Checked)
             {
-                action = "shutdown";  // Shutdown
+                action = "shutdown";
                 Process.Start("shutdown", $"/s /t {seconds}");
             }
             else if (radioButtonRestart.Checked)
             {
-                action = "restart";  // Restart
+                action = "restart";
                 Process.Start("shutdown", $"/r /t {seconds}");
             }
-            else if (radioButtonSleep.Checked)
+            else if (radioButtonHibernate.Checked)
             {
-                action = "sleep";  // Sleep
-                // TODO:
+                action = "hibernate";
+                Process.Start("shutdown", $"/h /t {seconds}");
             }
 
             if (!string.IsNullOrEmpty(action))
@@ -114,15 +114,35 @@ namespace EasyToUseShutdownTimer
             groupBox2.Visible = true;
 
             // Set the time when shutdown
-            timeTillAction.Text = "PC will " + Properties.Settings.Default.actionName + " at";
-            timeLabel.Text = Properties.Settings.Default.timeToTimer.ToString();
+            timeTillAction.Text = "Windows will " + Properties.Settings.Default.actionName;
 
-            // Center the timeTillAction label within the groupBox2 control
-            int timeTillActionLabelWidth = timeTillAction.Width;
+            // Formats timeToTimer text
+            DateTime timeToTimer = Properties.Settings.Default.timeToTimer;
+            DateTime currentTime = DateTime.Now;
+
+            if (timeToTimer.Day == currentTime.Day)
+            {
+                timeLabel.Text = timeToTimer.ToString("'Today at' HH:mm");
+            }
+            else if (timeToTimer.Day == currentTime.AddDays(1).Day)
+            {
+                timeLabel.Text = timeToTimer.ToString("'Tomorrow at' HH:mm");
+            }
+            else
+            {
+                timeLabel.Text = timeToTimer.ToString("'At' HH:mm 'on' dd. MMMM");
+            }
+
             int groupBoxWidth = groupBox2.Width;
-            int labelX = (groupBoxWidth - timeTillActionLabelWidth) / 2;
-            timeTillAction.Location = new Point(labelX, timeTillAction.Location.Y);
+            CenterLabelHorizontally(timeTillAction, groupBoxWidth);
+            CenterLabelHorizontally(timeLabel, groupBoxWidth);
+        }
 
+        void CenterLabelHorizontally(Label label, int containerWidth)
+        {
+            int labelWidth = label.Width;
+            int labelX = (containerWidth - labelWidth) / 2;
+            label.Location = new Point(labelX, label.Location.Y);
         }
     }
 }

@@ -34,6 +34,7 @@
             this.labelAction = new System.Windows.Forms.Label();
             this.radioButtonShutdown = new System.Windows.Forms.RadioButton();
             this.radioButtonRestart = new System.Windows.Forms.RadioButton();
+            this.radioButtonHibernate = new System.Windows.Forms.RadioButton();
             this.radioButtonSleep = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -103,13 +104,24 @@
             this.radioButtonRestart.Text = "Restart";
             this.radioButtonRestart.UseVisualStyleBackColor = true;
             // 
+            // radioButtonHibernate
+            // 
+            this.radioButtonHibernate.AutoSize = true;
+            this.radioButtonHibernate.Location = new System.Drawing.Point(98, 142);
+            this.radioButtonHibernate.Name = "radioButtonHibernate";
+            this.radioButtonHibernate.Size = new System.Drawing.Size(71, 17);
+            this.radioButtonHibernate.TabIndex = 6;
+            this.radioButtonHibernate.TabStop = true;
+            this.radioButtonHibernate.Text = "Hibernate";
+            this.radioButtonHibernate.UseVisualStyleBackColor = true;
+            // 
             // radioButtonSleep
             // 
             this.radioButtonSleep.AutoSize = true;
-            this.radioButtonSleep.Location = new System.Drawing.Point(98, 142);
+            this.radioButtonSleep.Location = new System.Drawing.Point(98, 165);
             this.radioButtonSleep.Name = "radioButtonSleep";
             this.radioButtonSleep.Size = new System.Drawing.Size(52, 17);
-            this.radioButtonSleep.TabIndex = 6;
+            this.radioButtonSleep.TabIndex = 9;
             this.radioButtonSleep.TabStop = true;
             this.radioButtonSleep.Text = "Sleep";
             this.radioButtonSleep.UseVisualStyleBackColor = true;
@@ -117,13 +129,14 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.groupBox2);
-            this.groupBox1.Controls.Add(this.radioButtonSleep);
+            this.groupBox1.Controls.Add(this.radioButtonShutdown);
+            this.groupBox1.Controls.Add(this.radioButtonRestart);
+            this.groupBox1.Controls.Add(this.radioButtonHibernate);
+            //this.groupBox1.Controls.Add(this.radioButtonSleep);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.dateTimePicker1);
             this.groupBox1.Controls.Add(this.labelWhen);
-            this.groupBox1.Controls.Add(this.radioButtonRestart);
             this.groupBox1.Controls.Add(this.labelAction);
-            this.groupBox1.Controls.Add(this.radioButtonShutdown);
             this.groupBox1.Location = new System.Drawing.Point(-1, 0);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(214, 235);
@@ -198,12 +211,14 @@
         private System.Windows.Forms.Label labelAction;
         private System.Windows.Forms.RadioButton radioButtonShutdown;
         private System.Windows.Forms.RadioButton radioButtonRestart;
+        private System.Windows.Forms.RadioButton radioButtonHibernate;
         private System.Windows.Forms.RadioButton radioButtonSleep;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button buttonTimerCancel;
         private System.Windows.Forms.Label timeTillAction;
         private System.Windows.Forms.Label timeLabel;
+       
     }
 }
 
